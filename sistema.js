@@ -8,6 +8,7 @@ function Participante() {
     this.aprovado = false;
 }
 
+
 /***********************
  * Representa o sistema
  * Uma vez instanciado, deve-se usar essa mesma
@@ -17,12 +18,11 @@ function SistemaCadastro() {
 
 
     var participantes = [];
-    var buscarNome = [];
-    var buscarSexo = [];
     
 
     function adicionarParticipante(nome, sobrenome, email, idade, sexo) {
         var p = new Participante();
+              
         p.nome = nome;
         p.sobrenome = sobrenome;
         p.email = email;
@@ -38,76 +38,68 @@ function SistemaCadastro() {
     function removerParticipante(email) {
         for(var i=0; i < participantes.length; i++){
             if(participantes[i].email == email ){
-               var removedItem = participantes.splice(i, 1);               
+               var removerParticipanteDoEmail = participantes.splice(i, 1);               
             }
         }      
     }
 
     function buscarParticipantesPorNome(nome){
-        var linhaNome = new Participante();
+        var buscarParticipantesPorNomeRetorno = [];
         for(var i=0; i < participantes.length; i++){
-            if(participantes[i].nome == nome ){
-                linhaNome.sobrenome = participantes[i].sobrenome;
-                linhaNome.idade = participantes[i].idade;
-                linhaNome.sexo = participantes[i].sexo;
-
-                buscarNome.push(linhaNome);          
+            if(participantes[i].nome === nome ){
+                buscarParticipantesPorNomeRetorno.push(participantes[i]);
                 
             }
         }
-        return buscarNome;
+        return buscarParticipantesPorNomeRetorno;
+
     }  
 
     function buscarParticipantesPorSexo(sexo){
-        var linhaSexo = new Participante();
+        var buscarParticipantesPorSexoRetorno = [];
             for(var i=0; i < participantes.length; i++){
-                if(participantes[i].sexo == sexo ){
-                      linhaSexo.sobrenome = participantes[i].sobrenome;
-                      linhaSexo.idade = participantes[i].idade;
-                      linhaSexo.sexo = participantes[i].sexo;
-
-                      buscarSexo.push(linhaSexo);
+                if(participantes[i].sexo === sexo ){
+                    buscarParticipantesPorSexoRetorno.push(participantes[i]);
                
                }
              }
-        return buscarSexo;
+        return buscarParticipantesPorSexoRetorno;
     }
 
     function buscarParticipantesAprovados(){
-        var contAprovados = [];
+        var contagemDeParticipantesAprovados = [];
              for(var i=0; i < participantes.length; i++){
-                 if(participantes[i].aprovado == true){
-                     contAprovados.push(participantes[i].aprovado);             
+                 if(participantes[i].aprovado === true){
+                    contagemDeParticipantesAprovados.push(participantes[i].aprovado);             
                  }
              }
-        return contAprovados; 
+        return contagemDeParticipantesAprovados; 
     }
     
     function buscarParticipantesReprovados(){ 
-        var contReprovados = [];     
+        var contagemDeparticipantesReprovados = [];     
             for(var i=0; i < participantes.length; i++){
-                if(participantes[i].aprovado == false ){
-                     contReprovados.push(participantes[i].aprovado)        
+                if(participantes[i].aprovado === false ){
+                    contagemDeparticipantesReprovados.push(participantes[i].aprovado)        
                 }
                
             } 
-        return contReprovados; 
+        return contagemDeparticipantesReprovados; 
     }
 
     function obterParticipante(email){
-        var linhaObter = new Participante();
             for(var i=0; i < participantes.length; i++){
                 if(participantes[i].email == email ){
                      return participantes[i];
                 }
             
-            }
-             
+            }             
 
     }
+    
     function adicionarNotaAoParticipante(email, nota){
       for(var i=0; i < participantes.length; i++){
-            if(participantes[i].email == email ){
+            if(participantes[i].email === email ){
                    participantes[i].nota = nota;
                    if(nota >= 70){
                     participantes[i].aprovado = true;
@@ -120,12 +112,11 @@ function SistemaCadastro() {
     }
 
     function obterMediaDasNotasDosParticipantes(){
-        var media = 0;
         var totalNotasParticipantes = 0;
             for(var i=0; i < participantes.length; i++){
                  totalNotasParticipantes = totalNotasParticipantes+participantes[i].nota;
             }
-        return media = (totalNotasParticipantes/participantes.length);
+        return (totalNotasParticipantes/participantes.length);
        
     }
     
@@ -135,7 +126,7 @@ function SistemaCadastro() {
     
     function verificarSeParticipanteEstaAprovado(email){
         for(var i=0; i < participantes.length; i++){
-            if(participantes[i].email == email){
+            if(participantes[i].email === email){
                 return participantes[i];
             }
         }     
@@ -144,16 +135,17 @@ function SistemaCadastro() {
     }
    
     function obterQuantidadeDeParticipantesPorSexo(sexo){
-        var cont = 0;
+        var quantidadeDeParticipantesPorSexo= 0;
         for(var i=0; i < participantes.length; i++){
-            if(participantes[i].sexo == sexo ){
-                cont++;               
+            if(participantes[i].sexo === sexo ){
+                quantidadeDeParticipantesPorSexo++;               
             }
         }
-        return cont;
+        return quantidadeDeParticipantesPorSexo;
     
     }
 
+   
     return {
         adicionarParticipante,
         removerParticipante,
