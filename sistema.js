@@ -92,11 +92,7 @@ function Participante() {
     }
    
     function verificarSeParticipanteEstaAprovado(email){
-        for(var i=0; i < participantes.length; i++){
-            if(participantes[i].email === email){
-                return participantes[i];
-            }
-        }    
+        return participantes.filter(function(p){  return p.aprovado == true && p.email == email});
            
  
     }
