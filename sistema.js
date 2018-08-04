@@ -34,7 +34,7 @@ function SistemaCadastro() {
     }
 
     function removerParticipante(email) {
-        participantes.forEach(function (p, indice) {
+        participantes.forEach(function (participante, indice) {
             if (p.email === email) {
                 participantes.splice(indice, 1);
             }
