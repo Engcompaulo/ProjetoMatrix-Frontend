@@ -23,7 +23,10 @@ function SistemaCadastro() {
     function adicionarParticipante(nome, sobrenome, email, idade, sexo) {
         var p = new Participante();
 
-        if (validarEmail(email)) {
+        if (obterParticipante(email)) {
+            throw new Error ("email cadastrado");
+           
+        }else{
             p.nome = nome;
             p.sobrenome = sobrenome;
             p.email = email;
@@ -31,44 +34,47 @@ function SistemaCadastro() {
             p.sexo = sexo;
             participantes.push(p);
         }
+        
     }
 
     function removerParticipante(email) {
-        participantes.forEach(function (participante, indice) {
-            if (p.email === email) {
-                participantes.splice(indice, 1);
+        participantes.forEach(function (participante, indice, arrayParticipante) {
+            if(obterParticipante(email) === participante) {          
+                arrayParticipante.splice(indice, 1);
             }
+            return false
         })
+        
 
     }
 
     function buscarParticipantesPorNome(nome) {
         return participantes.filter(function (participante) {
-            return participante.nome == nome;
+            return participante.nome === nome;
         })
     }
 
     function buscarParticipantesPorSexo(sexo) {
         return participantes.filter(function (participante) {
-            return participante.sexo == sexo;
-        })
+            return participante.sexo === sexo;
+        });
     }
 
     function buscarParticipantesAprovados() {
         return participantes.filter(function (participante) {
-            return participante.aprovado
-        })
+            return participante.aprovado;
+        });
     }
 
     function buscarParticipantesReprovados() {
         return participantes.filter(function (participante) {
-            return participante.aprovado == false
-        })
+            return participante.aprovado === false
+        });
     }
 
     function obterParticipante(email) {
         return participantes.find(function (participante) {
-            return participante.email == email;
+            return participante.email === email;
         });
     }
 
@@ -78,15 +84,15 @@ function SistemaCadastro() {
                 participante.nota = nota;
                 participante.aprovado = true;
             }
-        })
-
+        });
 
     }
 
     function obterMediaDasNotasDosParticipantes() {
-        return participantes.reduce(function (valorNotaParticipante, valorAtualDaSoma) {
-            return valorNotaParticipante.nota + valorAtualDaSoma.nota;
-        }) / obterTotalDeParticipantes();
+       var totalNotas =  participantes.reduce(function (valorAtualParaSomar, valorNotaParticipante) {
+            return valorAtualParaSomar + valorNotaParticipante.nota;
+        }, 0);
+        return totalNotas/participantes.length;
     }
 
     function obterTotalDeParticipantes() {
@@ -94,28 +100,15 @@ function SistemaCadastro() {
     }
 
     function verificarSeParticipanteEstaAprovado(email) {
-        if (obterParticipante(email).aprovado == true) {
+        if (obterParticipante(email).aprovado === true) {
             return true;
         }
     }
 
     function obterQuantidadeDeParticipantesPorSexo(sexo) {
-        var totalDeParticipantesPorSexo = 0;
-
-        if (buscarParticipantesPorSexo(sexo) != null) {
-            totalDeParticipantesPorSexo++;
-            buscarParticipantesPorSexo(sexo);
-        }
-        return totalDeParticipantesPorSexo;
-
+         return buscarParticipantesPorSexo(sexo).length;
     }
 
-    function validarEmail(email) {
-        for (var i = 0; i < participantes.length; i++) {
-            if (participantes[i].email == email) throw "email cadastrado";
-        }
-        return true;
-    }
 
 
     return {
