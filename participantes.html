@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://getbootstrap.com/docs/4.1/examples/checkout/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+
+  <title>Checkout example for Bootstrap</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="./css/form-validation.css" rel="stylesheet">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="./js/armazenamento.js"></script>
+</head>
+
+<body class="bg-light">
+
+  <div class="container">
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="http://www.lucianofeijao.com.br/novo/wp-content/uploads/2018/02/CLF.png" alt="" width="100"
+        height="100">
+      <h2>Controle de participantes</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Cadastro</h4>
+        <form class="needs-validation" novalidate="" name="dados" id="frmCadastro">
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="Nome">Nome</label>
+              <input type="text" class="form-control" id="IdNome" placeholder="Nome" required="">
+              <div class="invalid-feedback">
+                Campo vazio, deve ser preenchido.
+              </div>
+            </div>
+
+            <div class=" mb-3 col-md-6">
+              <label for="Sobrenome">Sobrenome</label>
+              <input type="text" class="form-control" id="IdSobrenome" placeholder="Sobrenome" required="">
+              <div class="invalid-feedback">
+                Campo vazio, deve ser preenchido.
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="mb-3 col-sm-8">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="IdEmail" placeholder="seuemail@examplo.com">
+              <div class="invalid-feedback">
+                Campo vazio, deve ser preenchido.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="mb-3 col-sm-2">
+              <label for="Idade">Idade</label>
+              <input type="number" class="form-control" id="IdIdade" placeholder="" required="">
+              <div class="invalid-feedback">
+                Campo vazio, deve ser preenchido
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-sm-2">
+              <label for="Nota">Nota</label>
+              <input type="number" class="form-control" id="IdNota" placeholder="" required="">
+              <div class="invalid-feedback">
+                Campo vazio, deve ser preenchido
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="mb-3 col-sm-8">
+              Sexo   
+                <input type="radio" name="marcarSexo" id="IdSexo1" value=1 > <label for='Masculino'>Masculino</label>          
+                <input type="radio" name="marcarSexo" id="IdSexo2" value=2 ><label for='Feminino'>Feminino</label>
+
+            </div>
+          </div>
+          <div class="row">
+          </div>
+
+          </diform>
+          <hr class="mb-8">
+          <button class="btn btn-primary btn-lg btn-block" type="submit" id="btnSalvar" value="Salvar">Salvar</button>
+        </form>
+
+        <div class="row">
+          <div class=" col-xs-12 .col-sm-6 .col-lg-8">
+            <table class="table" id="tblListar">
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">Projeto Matrix</p>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="https://getbootstrap.com/docs/4.1/examples/checkout/#">Privacy</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://getbootstrap.com/docs/4.1/examples/checkout/#">Terms</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://getbootstrap.com/docs/4.1/examples/checkout/#">Support</a>
+        </li>
+      </ul>
+    </footer>
+  </div>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="./js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="./js/jquery-slim.min.js"><\/script>')</script>
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/holder.min.js"></script>
+
+
+
+  <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function () {
+        'use strict';
+
+        window.addEventListener('load', function () {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+  </script>
+
+
+</body>
+
+</html>
