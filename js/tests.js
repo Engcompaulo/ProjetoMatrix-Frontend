@@ -35,6 +35,7 @@ QUnit.module( "Gerenciar Participantes", function() {
   QUnit.test( "obter participante", function( assert ) {
     sistema.adicionarParticipante("Rodolfo", "Mendes", "rmendes@matrix.com", 16, 1);
     var rodolfo = sistema.obterParticipante("rmendes@matrix.com");
+    //console.log(rodolfo);
     sistema.removerParticipante("rmendes@matrix.com");
 
     assert.equal( rodolfo.sobrenome, "Mendes", "Sobrenome correto");

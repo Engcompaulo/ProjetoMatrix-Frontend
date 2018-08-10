@@ -1,115 +1,75 @@
-$(function(){
-
-	var operacao = "A"; //"A"=Adição; "E"=Edição
-	var indice_selecionado = -1;
-	var tbParticipantes = localStorage.getItem("tbParticipantes");// Recupera os dados armazenados
-	tbParticipantes = JSON.parse(tbParticipantes); // Converte string para objeto
-
-	if(tbParticipantes == null) // Caso não haja conteúdo, iniciamos um vetor vazio
-        tbParticipantes = [];
-
-	function Adicionar(){
-		var part = GetParticipante("Email", $("#IdEmail").val());
-
-		if(part != null){
-			alert("Código já cadastrado.");
-			return;
-        }
-        
-
-		var participante = JSON.stringify({
-            Nome         : $("#IdNome").val(),
-            sobrenome    : $("#IdSobrenome").val(),
-            Email        : $("#IdEmail").val(),
-            Idade        : $("#IdIdade").val(),
-            Nota         : $("#IdNota").val(),
-            Sexo : $("input[name='marcarSexo']:checked").val()
-     
-            
+function Armazenamento(key){
     
+    //iniciar Storage com um array vazio
+    if(window.localStorage.getItem(key) === null)
+        window.localStorage.setItem(key, "[]");
+
+    function adicionar(item){
+        //obtem os itens salvos
+        var itens = deserializar();
+        //guarda o item, observe que o armazenamento não sabe de que item se trata
+        //poderia ser um Participante ou qualquer outro objeto. Só precisa mesmo ser um objeto.
+        itens.push(item);
+        //Guarda novamente o Array modificado
+        serializar(itens);
+    }
+
+    function remover(propriedade, valor){
+        var itens = deserializar();
+        var indice = itens.findIndex((elemento) => {
+            return elemento[propriedade] === valor;
         });
+        itens.splice(indice, 1);
+        serializar(itens);
+    }
 
-        tbParticipantes.push(participante);
-        
+    function atualizar(item, propriedade) {
+        //obtem os itens salvos        
+        var itens = deserializar();
+        //procura o indice do objeto que possui a propriedade igual ao do item que estou passando
+        var indice = itens.findIndex((elemento) => {
+            return elemento[propriedade] === item[propriedade]
+        });
+        //substitui o item. existem outras formas de fazer isso, abstraia
+        itens[indice] = item;
+        //Guarda novamente o Array modificado
+        serializar(itens);
+    }
 
-		localStorage.setItem("tbParticipantes", JSON.stringify(tbParticipantes));
+    function obterItem(propriedade, valor) {
+        var itens = deserializar();
+        return itens.find((elemento) => {
+             return elemento[propriedade] === valor; }
+            );
+    }
 
-		alert("Registro adicionado.");
-		return true;
-	}
+    function obterItens(propriedade, valor) {
+        var itens = deserializar();
+        return itens.find((elemento) => { 
+            return elemento[propriedade] === valor; 
+        })
+    }
 
-	function Listar(){
-		$("#tblListar").html("");
-		$("#tblListar").html(
-            "<thead>"+
-            "   <tr>"+
-            "   <th scope='col'>Nome</th>"+
-            "   <th scope='col'>Sobrenome</th>"+
-            "   <th scope='col'>Email</th>"+
-            "   <th scope='col'>Idade</th>"+
-            "   <th scope='col'>Nota</th>"+
-            "   <th scope='col'>Sexo</th>"+
-            "   </tr>"+
-            "</thead>"+
-            "<tbody>"+
-            "</tbody>"
-			);
+    function obterTodosOsItens(){
+        return deserializar();
+    }
 
-		 for(var i in tbParticipantes){
-			var part = JSON.parse(tbParticipantes[i]);
-		  	$("#tblListar tbody").append("<tr>"+
-									 	 "	<td scope='row'>"+part.Nome+"</td>" + 
-										 "	<td scope='row'>"+part.sobrenome+"</td>" + 
-										 "	<td scope='row'>"+part.Email+"</td>" + 
-                                         "	<td scope='row'>"+part.Idade+"</td>" + 
-                                         "	<td scope='row'>"+part.Nota+"</td>" + 
-                                         "	<td scope='row'>"+part.Sexo+"</td>" + 
-		  								 "</tr>");
-		 }
-	}
-/*
-	function Excluir(){
-		tbClientes.splice(indice_selecionado, 1);
-		localStorage.setItem("tbClientes", JSON.stringify(tbClientes));
-		alert("Registro excluído.");
-	}
-*/
-	function GetParticipante(propriedade, valor){
-		var part = null;
-        for (var item in tbParticipantes) {
-            var i = JSON.parse(tbParticipantes[item]);
-            if (i[propriedade] == valor)
-                part = i;
-        }
-        return part;
-	}
+    function deserializar(){
+        var itensSerializados = window.localStorage.getItem(key);
+        return JSON.parse(itensSerializados);
+    }
 
-	Listar();
+    function serializar(itens){
+        var itensSerializados = JSON.stringify(itens);
+        window.localStorage.setItem(key, itensSerializados);
+    }
 
-	$("#frmCadastro").on("submit",function(){
-		if(operacao == "A")
-			return Adicionar();
-		//else
-		//	return Editar();		
-	});
-
-	$("#tblListar").on("click", ".btnEditar", function(){
-		operacao = "E";
-		indice_selecionado = parseInt($(this).attr("alt"));
-		var part = JSON.parse(tbParticipantes[indice_selecionado]);
-		$("#IdNome").val(part.Nome);
-		$("#IdSobrenome").val(part.Sobrenome);
-		$("#IdEmail").val(part.Email);
-        $("#IdIdade").val(part.Idade);
-        $("#IdNota").val(part.Nota);
-        $("#IdSexo").val(part.Sexo);
-		$("#IdEmail").attr("readonly","readonly");
-		$("#txtNome").focus();
-	});
-
-	$("#tblListar").on("click", ".btnExcluir", function(){
-		indice_selecionado = parseInt($(this).attr("alt"));
-		//Excluir();
-		Listar();
-	});
-});
+    return {
+        adicionar,
+        remover,
+        atualizar,
+        obterItem,
+        obterItens,
+        obterTodosOsItens
+    };
+}
