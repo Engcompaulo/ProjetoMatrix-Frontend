@@ -37,7 +37,7 @@
           <div class="row">
           <div class="col-md-6 mb-3">
               <label for="nome">Nome</label>
-              <input type="text" class="form-control" id="nome" placeholder="Nome" value="" required="">
+              <input type="text" class="form-control" id="nome" placeholder="Nome"   required="">
               <div class="invalid-feedback">
                 Campo vazio, deve ser preenchido.
               </div>
@@ -45,7 +45,7 @@
 
             <div class=" mb-3 col-md-6">
               <label for="sobrenome">Sobrenome</label>
-              <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome" value="" required="">
+              <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome" required="">
               <div class="invalid-feedback">
                 Campo vazio, deve ser preenchido.
               </div>
@@ -55,7 +55,7 @@
           <div class="row">
             <div class="mb-3 col-sm-8">
               <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="seuemail@examplo.com">
+              <input type="email" class="form-control" id="email" placeholder="seuemail@examplo.com" >
               <div class="invalid-feedback">
                 Campo vazio, deve ser preenchido.
               </div>
@@ -66,7 +66,7 @@
           <div class="row">
             <div class="mb-3 col-sm-2">
               <label for="idade">Idade</label>
-              <input type="number" class="form-control" id="idade" placeholder="" required="">
+              <input type="number" class="form-control" id="idade" placeholder="" required="" value="18">
               <!--<small class="text-muted">Full name as displayed on card</small>-->
               <div class="invalid-feedback">
                 Campo vazio, deve ser preenchido
@@ -76,7 +76,7 @@
           <div class="row">
             <div class="mb-3 col-sm-2">
               <label for="nota">Nota</label>
-              <input type="number" class="form-control" id="nota" placeholder="" required="">
+              <input type="number" class="form-control" id="nota" placeholder="" required="" >
               <div class="invalid-feedback">
                 Campo vazio, deve ser preenchido
               </div>
@@ -84,13 +84,12 @@
           </div>
 
           
-          <div class="mb-3">
-            <label for="sexo">Sexo</label>
-            <select class="custom-select d-block w-100" id="sexo" required="">
-              <option value="">Selecione...</option>
-              <option value="1">Masculino</option>
-              <option value="2">Feminino</option>
-            </select>
+          <div class="row">
+            <div class="mb-3 col-sm-8">
+              Sexo   
+                <input type="radio" name="marcarSexo" id="IdSexo1" value=1 > <label for='Masculino'>Masculino</label>          
+                <input type="radio" name="marcarSexo" id="IdSexo2" value=2 ><label for='Feminino'>Feminino</label>
+             </div>
           </div>
           <hr class="mb-4">
           <button class="btn btn-primary btn-lg btn-block" type="submit">Salvar</button>
@@ -99,18 +98,20 @@
       </div>
 
     </div>
-
     <div class="row">
-      <div class="col-md-8 order-md-2 mb-4">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-muted">Participantes</span>
-          <span class="badge badge-secondary badge-pill total_participantes">{{total_participantes}}</span>
-        </h4>
-        <!-- esse elemento irá receber os participantes -->
-        <ul class="list-group mb-3">
-        </ul>
+      <div class="col">
+  
+      </div>
+      <div class="col-lg-8">
+        <table class="table" id="tblListar">
+        </table>
+      </div>
+      <div class="col">
+    
       </div>
     </div>
+  </div>
+    
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">Projeto Matrix</p>
         <ul class="list-inline">
@@ -138,7 +139,8 @@
   <script src="./js/holder.min.js"></script>
   <script src="./js/sistema.js"></script>
   <script src="./js/armazenamento.js"></script>
-  <script src="./js/don.js"></script>
+  
+  
   
 
 </body>
