@@ -42,6 +42,15 @@ function SistemaCadastro() {
             window.location.reload(true);
     }
 
+    function atualizarParticipante(nome, sobrenome, email, idade, sexo, nota){
+		var participante = obterParticipante(email);    
+        participante = {nome,sobrenome,email,idade,sexo};
+        adicionarNotaAoParticipante(participante, nota);
+
+        armazenamento.editarParticipante(participante, "email");
+	}
+
+
 /*	
     function buscarParticipantesPorNome(nome) {
         return participantes.filter(function (participante) {

@@ -7,6 +7,18 @@ let idade = 0;
 let nota = 0;
 let sexo = 0;
 
+function editar(email) {
+    var participante = sistema.obterParticipante(email);
+    var form = document.querySelector("#formulario");
+    form.nome.value = participante.nome;
+    form.sobrenome.value = participante.sobrenome;
+    form.email.value = participante.email;
+    form.idade.value = participante.idade;
+    form.sexo.value = participante.sexo;
+    form.nota.value = participante.nota;
+    form.email.disabled = true;
+    form.atualizacao.value = true;
+  }
 
 function excluirParticipante(email){
 	sistema.removerParticipante(email);
@@ -32,8 +44,8 @@ function tblListar() {
         "</td><td>" + participantes.nota +
         "</td><td>" + participantes.aprovado +
         "</td><td>" +
-        "<a href='javascript:void(0)' onclick='editarDadosParticipante(\'" + participantes.email + "\')'>Editar</a>" +
-        " " + 
+        '<a href="javascript:void(0)" onclick="editar(\'' + participantes.email + '\')">Editar</a>' + 
+        "</td><td>" +
         '<a href="javascript:void(0)" onclick="excluirParticipante(\'' + participantes.email + '\')">Excluir</a>' + '</td></tr>'+
         "</td></tr>"
     });
@@ -73,14 +85,39 @@ function recuperarDados() {
                 event.preventDefault();
                 event.stopPropagation();
             } else {
-            
-            recuperarDados()
-            sistema.adicionarParticipante(nome, sobrenome, email, idade, sexo);
-            sistema.adicionarNotaAoParticipante(email, nota);
-            Listar()
-            window.location.reload(true);
 
+            try {
+                if (JSON.parse(form.atualizacao.value)) {
+                    sistema.atualizarParticipante(
+                    form.nome.value,
+                    form.sobrenome.value,
+                    form.email.value,
+                    form.idade.value,
+                    form.sexo.value,
+                    form.nota.value
+                  );
+                } else {
+                    recuperarDados()
+                    sistema.adicionarParticipante(nome, sobrenome, email, idade, sexo);
+                    sistema.adicionarNotaAoParticipante(email, nota);
+                    tblListar();
+                    window.location.reload(true);        
+                    
+                }
+                
+                window.location.reload(true);
+              } catch (e) {
+                //interrompe o ciclo do evento de submit
+                event.preventDefault();
+                event.stopPropagation();
+                alert(e.message);
+              }
+            
             }
+
+
+
+
 
                 
                 form.classList.add('was-validated');
