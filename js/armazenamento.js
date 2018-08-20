@@ -29,7 +29,7 @@ function Armazenamento(chave){
         function buscarNoLocalStorager(campo, novoValorParametro){
             var participantes = deserializar();
             return participantes.find(function(participante){
-                return participante[campo] == novoValorParametro;
+                return participante[campo] === novoValorParametro;
             });
         }
         function removerParticipante(emailDoParticipante, email){
@@ -40,6 +40,10 @@ function Armazenamento(chave){
             participantes.splice(index, 1);
             serializar(participantes);
         }
+        function obterTodosOsItens(){
+            return deserializar();
+    
+        }
     
 
     return{
@@ -48,7 +52,8 @@ function Armazenamento(chave){
         editarParticipante, 
         buscarNoLocalStorager, 
         deserializar, 
-        removerParticipante
+        removerParticipante, 
+        obterTodosOsItens
         
     };
 }

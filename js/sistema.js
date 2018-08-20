@@ -42,35 +42,17 @@ function SistemaCadastro() {
             window.location.reload(true);
     }
 
-    function atualizarParticipante(nome, sobrenome, email, idade, sexo, nota){
-		var participante = obterParticipante(email);    
-        participante = {nome,sobrenome,email,idade,sexo};
-        adicionarNotaAoParticipante(participante, nota);
-
-        armazenamento.editarParticipante(participante, "email");
-	}
-
-
-/*	
     function buscarParticipantesPorNome(nome) {
-        return participantes.filter(function (participante) {
-            return participante.nome === nome;
-        })
+        return armazenamento.buscarNoLocalStorager("nome", nome);
     }
 
     function buscarParticipantesPorSexo(sexo) {
-        return participantes.filter(function (participante) {
-            return participante.sexo === sexo;
-        });
-    }
-	
-    function buscarParticipantesAprovados() {
-        return participantes.filter(function (participante) {
-            return participante.aprovado;
-        });
+        return armazenamento.buscarNoLocalStorager("sexo", sexo);
     }
 
-	*/
+    function buscarParticipantesAprovados() {
+        return armazenamento.buscarNoLocalStorager("aprovado", true);
+    }
     function buscarParticipantesReprovados(){
 	    return armazenamento.buscarNoLocalStorager("aprovado", false);
     }
@@ -83,7 +65,6 @@ function SistemaCadastro() {
     	return armazenamento.deserializar();
     }
       
- 
     function adicionarNotaAoParticipante(email, nota){
         var participante = obterParticipante(email);
         participante.nota = nota;
@@ -93,46 +74,47 @@ function SistemaCadastro() {
 	    armazenamento.editarParticipante("email", participante);
     }
 
-    function atualizarParticipante(nome, sobrenome, email, idade, sexo, nota){
-		var participante = obterParticipante(email);
-        participante = {nome,sobrenome,email,idade,sexo};
-        adicionarNotaAoParticipante(email, nota);
-        armazenamento.editarParticipante(participante, "email");
-	}
-
-
-    /*
     function obterMediaDasNotasDosParticipantes() {
-       var totalNotas =  participantes.reduce(function (valorAtualParaSomar, valorNotaParticipante) {
-            return valorAtualParaSomar + valorNotaParticipante.nota;
-        }, 0);
-        return totalNotas/participantes.length;
-    }
-	
-    function verificarSeParticipanteEstaAprovado(email) {
-        if (obterParticipante(email).aprovado === true) {
-            return true;
-        }
+        var totalNotas =  participantes.reduce(function (valorAtualParaSomar, valorNotaParticipante) {
+             return valorAtualParaSomar + valorNotaParticipante.nota;
+         }, 0);
+         return totalNotas/participantes.length;
+     }
+
+    function obterMediaDasNotasDosParticipantes() {
+    var participantes = armazenamento.obterTodosOsItens();
+
+    var totalNotas = participantes.reduce(function(valorAtualParaSomar, valorNotaParticipante){            
+        return valorAtualParaSomar + valorNotaParticipante.nota;
+    }, 0);
+
+    return totalNotas/obterTotalDeParticipantes();
+    }    
+
+    function obterQuantidadeDeParticipantesPorSexo(sexo) {
+        return buscarParticipantesPorSexo(sexo).length;
+
     }
 
-	function obterQuantidadeDeParticipantesPorSexo(sexo) {
-         return buscarParticipantesPorSexo(sexo).length;
-    }
-
-   */
     function obterTotalDeParticipantes(){
     return armazenamento.deserializar().length;
     }
 
     return {
-        removerParticipante,
+        
         adicionarParticipante,
-        obterParticipantes, 
-        adicionarNotaAoParticipante,
+        removerParticipante,
+        buscarParticipantesPorNome,
+        buscarParticipantesPorSexo,
+        buscarParticipantesAprovados,
         buscarParticipantesReprovados,
         obterParticipante,
+        obterParticipantes, 
+        adicionarNotaAoParticipante,
+        obterMediaDasNotasDosParticipantes,
+        obterQuantidadeDeParticipantesPorSexo,
         obterTotalDeParticipantes,
-        atualizarParticipante
+    
         
     };
 }
