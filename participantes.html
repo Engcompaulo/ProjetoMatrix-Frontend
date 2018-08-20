@@ -22,127 +22,134 @@
 <body class="bg-light" data-gr-c-s-loaded="true">
 
   <div class="container">
-      <div class="py-5 text-center">
-          <img class="d-block mx-auto mb-4" src="http://www.lucianofeijao.com.br/novo/wp-content/uploads/2018/02/CLF.png" alt="" width="100"
-            height="100">
-          <h2>Controle de participantes</h2>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="http://www.lucianofeijao.com.br/novo/wp-content/uploads/2018/02/CLF.png" alt="" width="100"
+        height="100">
+      <h2>Controle de participantes</h2>
+    </div>
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col col-lg-2">
         </div>
-
-    <div class="row">
-      <div class="col-md-8 order-md-1">
-        <!-- <h4 class="mb-3">Billing address</h4> -->
-        <form id="formulario" class="needs-validation" novalidate="">
-          <!-- como é utilizado somente um formulário, essa variavel controla quando é criação e quando é edição -->
-          <input type="hidden" id="atualizacao" value="false">
-          <div class="row">
-          <div class="col-md-6 mb-3">
-              <label for="nome">Nome</label>
-              <input type="text" class="form-control" id="nome" placeholder="Nome"   required="">
-              <div class="invalid-feedback">
-                Campo vazio, deve ser preenchido.
-              </div>
-            </div>
-
-            <div class=" mb-3 col-md-6">
-              <label for="sobrenome">Sobrenome</label>
-              <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome" required="">
-              <div class="invalid-feedback">
-                Campo vazio, deve ser preenchido.
-              </div>
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="mb-3 col-sm-8">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="seuemail@examplo.com" >
-              <div class="invalid-feedback">
-                Campo vazio, deve ser preenchido.
-              </div>
-            </div>
-          </div>
-
-          <!--   <hr class="mb-4"> -->
-          <div class="row">
-            <div class="mb-3 col-sm-2">
-              <label for="idade">Idade</label>
-              <input type="number" class="form-control" id="idade" placeholder="" required="" value="18">
-              <!--<small class="text-muted">Full name as displayed on card</small>-->
-              <div class="invalid-feedback">
-                Campo vazio, deve ser preenchido
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="mb-3 col-sm-2">
-              <label for="nota">Nota</label>
-              <input type="number" class="form-control" id="nota" placeholder="" required="" >
-              <div class="invalid-feedback">
-                Campo vazio, deve ser preenchido
-              </div>
-            </div>
-          </div>
-
-          
-          <div class="row">
-            <div class="mb-3 col-sm-8">
-              Sexo   
-                <input type="radio" name="marcarSexo" id="IdSexo1" value=1 > <label for='Masculino'>Masculino</label>          
-                <input type="radio" name="marcarSexo" id="IdSexo2" value=2 ><label for='Feminino'>Feminino</label>
-             </div>
-          </div>
-          <hr class="mb-4">
-          <button class="btn btn-primary btn-lg btn-block" type="submit">Salvar</button>
-        </form>
+        <div class="col-md-auto">
+          Total de participantes
+        </div>
+        <div class="col-md-auto" id="total">
+          <!-- aqui total-->
+        </div>
+        <div class="col col-lg-2">
         </div>
       </div>
 
-    </div>
-    <div class="row">
-      <div class="col">
-  
-      </div>
-      <div class="col-lg-8">
-        <table class="table" id="tblListar">
-        </table>
-      </div>
-      <div class="col">
-    
-      </div>
-    </div>
-  </div>
-    
-    <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">Projeto Matrix</p>
-        <ul class="list-inline">
-          <li class="list-inline-item">
-            <a href="/#">Privacy</a>
-          </li>
-          <li class="list-inline-item">
-            <a href="/#">Terms</a>
-          </li>
-          <li class="list-inline-item">
-            <a href="/#">Support</a>
-          </li>
-        </ul>
-      </footer>
-  </div>
+      <div class="row">
+        <div class="col-md-8 order-md-1">
+          <form id="formulario" class="needs-validation" novalidate="">
+            <input type="hidden" id="atualizacao" value="false">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" placeholder="Nome" required="">
+                <div class="invalid-feedback">
+                  Campo vazio, deve ser preenchido.
+                </div>
+              </div>
 
-  <!-- Bootstrap core JavaScript
+              <div class=" mb-3 col-md-6">
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome" required="">
+                <div class="invalid-feedback">
+                  Campo vazio, deve ser preenchido.
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="mb-3 col-sm-8">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="seuemail@examplo.com">
+                <div class="invalid-feedback">
+                  Campo vazio, deve ser preenchido.
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="mb-3 col-sm-2">
+                <label for="idade">Idade</label>
+                <input type="number" class="form-control" id="idade" placeholder="" required="">
+
+                <div class="invalid-feedback">
+                  Campo vazio, deve ser preenchido
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="mb-3 col-sm-2">
+                <label for="nota">Nota</label>
+                <input type="number" class="form-control" id="nota" placeholder="" required="">
+                <div class="invalid-feedback">
+                  Campo vazio, deve ser preenchido
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="mb-3 col-sm-8">
+                Sexo
+                <input class="sexo" name="sexo" type="radio" value="m" checked="checked" /> masculino
+                <input class="sexo" name="sexo" type="radio" value="f" /> feminino
+              </div>
+              <hr class="mb-4">
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Salvar</button>
+          </form>
+          <table class="table">
+            <thead class="bg-light">
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Sobrenome</th>
+                <th scope="col">Idade</th>
+                <th scope="col">Sexo</th>
+                <th scope="col">Nota</th>
+                <th scope="col">Aprovado</th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+              </tr>
+            </thead>
+            <tbody id="tblListar">
+            </tbody>
+          </table>
+
+          </div>
+          <div>
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+              <p class="mb-1">Projeto Matrix</p>
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <a href="/#">Privacy</a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="/#">Terms</a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="/#">Support</a>
+                </li>
+              </ul>
+            </footer>
+          </div>
+
+          <!-- Bootstrap core JavaScript
     ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script>window.jQuery || document.write('<script src="./recursos/jquery-slim.min.js"><\/script>')</script>
-  <script src="./js/popper.min.js"></script>
-  <script src="./js/bootstrap.min.js"></script>
-  <script src="./js/holder.min.js"></script>
-  <script src="./js/sistema.js"></script>
-  <script src="./js/armazenamento.js"></script>
-  
-  
-  
-
+          <!-- Placed at the end of the document so the pages load faster -->
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+          <script>window.jQuery || document.write('<script src="./recursos/jquery-slim.min.js"><\/script>')</script>
+          <script src="./js/popper.min.js"></script>
+          <script src="./js/bootstrap.min.js"></script>
+          <script src="./js/holder.min.js"></script>
+          <script src="./js/armazenamento.js"></script>
+          <script src="./js/sistema.js"></script>
+          <script src="./js/dom.js"></script>
 </body>
 
 </html>
