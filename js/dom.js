@@ -16,8 +16,9 @@ function editar(email) {
     form.idade.value = participante.idade;
     form.sexo.value = participante.sexo;
     form.nota.value = participante.nota;
-    form.email.disabled = true;
     form.atualizacao.value = true;
+    form.email.disabled = true;   
+    
   }
 
 function excluirParticipante(email){
@@ -38,7 +39,7 @@ function tblListar() {
     sistema.obterParticipantes().forEach(function (participantes) {
     document.getElementById("tblListar").innerHTML +=
         "<td>" + participantes.nome +
-        "</td><td> " + participantes.sobrenome +
+        " " + participantes.sobrenome +
         "</td><td>" + participantes.idade +
         "</td><td>" + participantes.sexo +
         "</td><td>" + participantes.nota +
@@ -85,24 +86,21 @@ function recuperarDados() {
                 event.preventDefault();
                 event.stopPropagation();
             } else {
-
             try {
                 if (JSON.parse(form.atualizacao.value)) {
-                    sistema.atualizarParticipante(
-                    form.nome.value,
-                    form.sobrenome.value,
-                    form.email.value,
-                    form.idade.value,
-                    form.sexo.value,
-                    form.nota.value
-                  );
+                  recuperarDados();
+                  sistema.removerParticipante(email);
+                  recuperarDados();
+                  sistema.adicionarParticipante(nome, sobrenome, email, idade, sexo);
+                  sistema.adicionarNotaAoParticipante(email, nota);
+                  tblListar();
+                  window.location.reload(true);
                 } else {
-                    recuperarDados()
-                    sistema.adicionarParticipante(nome, sobrenome, email, idade, sexo);
-                    sistema.adicionarNotaAoParticipante(email, nota);
-                    tblListar();
-                    window.location.reload(true);        
-                    
+                  recuperarDados()
+                  sistema.adicionarParticipante(nome, sobrenome, email, idade, sexo);
+                  sistema.adicionarNotaAoParticipante(email, nota);
+                  tblListar();
+                  window.location.reload(true);          
                 }
                 
                 window.location.reload(true);
@@ -115,12 +113,7 @@ function recuperarDados() {
             
             }
 
-
-
-
-
-                
-                form.classList.add('was-validated');
+            form.classList.add('was-validated');
             }, false);
         });
     }, false);
